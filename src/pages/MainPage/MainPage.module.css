@@ -1,0 +1,97 @@
+
+.container {
+	display: flex;
+	height: 100vh;
+	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+}
+
+.sidebar {
+	width: 260px;
+	border-right: 1px solid #e6e6e6;
+	padding: 12px;
+	box-sizing: border-box;
+	background: #fafafa;
+}
+
+.sidebarHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.addBtn {
+	background: #1976d2;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	padding: 6px 8px;
+	cursor: pointer;
+}
+
+.memoList {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	overflow: auto;
+	max-height: calc(100vh - 80px);
+}
+
+.item {
+	padding: 8px;
+	cursor: pointer;
+	border-radius: 4px;
+	margin-bottom: 6px;
+}
+
+.selectedItem {
+	background: #eef6ff;
+	padding: 8px;
+	cursor: pointer;
+	border-radius: 4px;
+	margin-bottom: 6px;
+}
+
+.itemTitle {
+	font-weight: 500;
+}
+
+.itemTime {
+	font-size: 12px;
+	color: #666;
+}
+
+.editorArea {
+	flex: 1;
+	padding: 16px;
+	box-sizing: border-box;
+}
+
+.empty {
+	color: #888;
+	text-align: center;
+	margin-top: 40px;
+}
+
+.editor {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+.titleInput {
+	font-size: 20px;
+	padding: 8px;
+	margin-bottom: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+}
+
+.contentInput {
+	flex: 1;
+	padding: 12px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	resize: none;
+	min-height: 200px;
+}
