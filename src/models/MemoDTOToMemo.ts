@@ -8,5 +8,6 @@ export default function MemoDTOToMemo(memoDTO: MemoDTO): Memo {
         content: memoDTO.content,
         createdAt: memoDTO.createdAt.toDate(),
         updatedAt: memoDTO.updatedAt.toDate(),
+        dirty: false,
     }
 }

@@ -13,23 +13,23 @@ export default function Editor() {
     const memo = memos.find(m => m.id === selectedId) as Memo;
 
     const onChange = (updatedFields: Partial<Memo>) => {
-        updateMemo({ ...updatedFields, id: memo.id });
+        updateMemo(memo.id, { ...updatedFields, updatedAt: new Date(), dirty: true });
     }
-    
+
     return (
         <div className={styles.editor}>
             <input
                 className={styles.titleInput}
                 value={memo.title}
                 placeholder="Title"
-                onChange={e => onChange({ title: e.target.value, updatedAt: new Date() })}
+                onChange={e => onChange({ title: e.target.value })}
             />
 
             <textarea
                 className={styles.contentInput}
                 value={memo.content}
                 placeholder="Write your memo..."
-                onChange={e => onChange({ content: e.target.value, updatedAt: new Date() })}
+                onChange={e => onChange({ content: e.target.value })}
             />
         </div>
     )

@@ -8,7 +8,7 @@ export default function Sidebar() {
     if (!useMainPageReturn) {
         throw new Error("Sidebar must be used within a UseMainPageContext.Provider");
     }
-    const { memos, selectedId, setSelectedId, addNewMemo } = useMainPageReturn;
+    const { memos, selectedId, setSelectedId, addNewMemo, saving } = useMainPageReturn;
 
     const handleAdd = () => {
         const newMemo = addNewMemo();
@@ -22,7 +22,10 @@ export default function Sidebar() {
     return (
         <aside className={styles.sidebar}>
             <div className={styles.sidebarHeader}>
-                <h2>Memos</h2>
+                <div>
+                    <h2>Memos</h2>
+                    <div className={styles.subHeader}>{saving? `Saving...` : `All memos (${memos.length})`}</div>
+                </div>
                 <button className={styles.addBtn} onClick={handleAdd}>+</button>
             </div>
 
