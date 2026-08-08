@@ -1,12 +1,12 @@
 import type Memo from "@/models/Memo"
 import styles from "./MainPage.module.css"
 import { useContext } from "react"
-import { UseMainPageContext } from "./MainPage"
+import UseMainPageContext from "./UseMainPageContext"
 
 export default function Editor() {
     const useMainPageReturn = useContext(UseMainPageContext);
     if (!useMainPageReturn) {
-        throw new Error("Sidebar must be used within a UseMainPageContext.Provider");
+        throw new Error("Editor must be used within a UseMainPageContext.Provider");
     }
 
     const { memos, selectedId, updateMemo } = useMainPageReturn;

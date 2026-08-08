@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import styles from "./MainPage.module.css"
-import { UseMainPageContext } from "./MainPage";
+import UseMainPageContext from "./UseMainPageContext";
 
 
 export default function Sidebar() {
