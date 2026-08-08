@@ -10,6 +10,11 @@ export default function useDebouncer<T extends any[]>(fn: (...args: T) => void, 
             fn(...args)
         }, delay)
     }, [fn, delay])
+    
+    const callImmediately = useCallback((...args: T) => {
+        if (timeoutRef.current) clearTimeout(timeoutRef.current);
+        fn(...args)
+    }, [fn, delay])
 
-    return { call }
+    return { call, callImmediately }
 }

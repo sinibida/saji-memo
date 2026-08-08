@@ -21,7 +21,7 @@ export default function MainPage() {
                     {selectedMemo ? (
                         <Editor />
                     ) : (
-                        <div className={styles.empty}>Select or create a memo</div>
+                        <div className={styles.empty}>메모를 선택하거나 생성하세요</div>
                     )}
                 </main>
             </div>

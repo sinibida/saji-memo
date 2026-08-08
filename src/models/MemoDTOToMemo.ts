@@ -9,5 +9,6 @@ export default function MemoDTOToMemo(memoDTO: MemoDTO): Memo {
         createdAt: memoDTO.createdAt.toDate(),
         updatedAt: memoDTO.updatedAt.toDate(),
         dirty: false,
+        deleted: false,
     }
 }

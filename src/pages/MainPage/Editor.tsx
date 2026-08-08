@@ -1,9 +1,11 @@
 import type Memo from "@/models/Memo"
 import styles from "./Editor.module.css"
-import { useContext } from "react"
+import { useContext, useEffect, useRef } from "react"
 import UseMainPageContext from "./UseMainPageContext"
 
 export default function Editor() {
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
+
     const useMainPageReturn = useContext(UseMainPageContext);
     if (!useMainPageReturn) {
         throw new Error("Editor must be used within a UseMainPageContext.Provider");
@@ -13,8 +15,12 @@ export default function Editor() {
     const memo = memos.find(m => m.id === selectedId) as Memo;
 
     const onChange = (updatedFields: Partial<Memo>) => {
-        updateMemo(memo.id, { ...updatedFields, updatedAt: new Date(), dirty: true });
+        updateMemo(memo.id, { ...updatedFields});
     }
+
+    useEffect(() => {
+        textareaRef.current?.focus();
+    }, [selectedId])
 
     return (
         <div className={styles.editor}>
@@ -26,6 +32,7 @@ export default function Editor() {
             />
 
             <textarea
+                ref={textareaRef}
                 className={styles.contentInput}
                 value={memo.content}
                 placeholder="Write your memo..."

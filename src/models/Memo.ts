@@ -5,4 +5,5 @@ export default interface Memo {
     createdAt: Date;
     updatedAt: Date;
     dirty: boolean;
+    deleted: boolean;
 }
