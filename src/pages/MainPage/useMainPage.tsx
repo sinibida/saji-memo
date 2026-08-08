@@ -6,7 +6,7 @@ import MemoToMemoDTO from "@/models/MemoToMemoDTO";
 import apiDeleteMemo from "@/services/apiDeleteMemo";
 import apiGetMemoAll from "@/services/apiGetMemoAll";
 import apiSetMemo from "@/services/apiSetMemo";
-import { memo, useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 export type UseMainPageReturn = ReturnType<typeof useMainPage>
 

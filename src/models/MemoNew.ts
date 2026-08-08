@@ -7,6 +7,7 @@ export default function MemoNew(): Memo {
         content: "",
         createdAt: new Date(),
         updatedAt: new Date(),
-        dirty: true,
+        dirty: false,
+        deleted: false,
     }
 }
