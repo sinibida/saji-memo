@@ -1,4 +1,4 @@
-import styles from "./MainPage.module.css"
+import styles from "./Loading.module.css"
 
 export default function Loading() {
     return (

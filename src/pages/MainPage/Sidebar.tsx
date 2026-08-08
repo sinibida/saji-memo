@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import styles from "./MainPage.module.css"
+import styles from "./Sidebar.module.css"
 import UseMainPageContext from "./UseMainPageContext";
 
 
@@ -21,10 +21,10 @@ export default function Sidebar() {
 
     return (
         <aside className={styles.sidebar}>
-            <div className={styles.sidebarHeader}>
+            <div className={styles.header}>
                 <div>
-                    <h2>Memos</h2>
-                    <div className={styles.subHeader}>{saving? `Saving...` : `All memos (${memos.length})`}</div>
+                    <h2 className={styles.title}>📝 싸지 메모</h2>
+                    <div className={styles.subtitle}>{saving? `Saving...` : `All memos (${memos.length})`}</div>
                 </div>
                 <button className={styles.addBtn} onClick={handleAdd}>+</button>
             </div>

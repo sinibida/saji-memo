@@ -2,13 +2,12 @@
 .container {
 	display: flex;
 	height: 100vh;
-	font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
 }
 
 .sidebar {
-	width: 260px;
+	width: 320px;
 	border-right: 1px solid #e6e6e6;
-	padding: 12px;
+	padding: 1rem;
 	box-sizing: border-box;
 	background: #fafafa;
 }
@@ -17,21 +16,21 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: 8px;
+	margin-bottom: 0.5rem;
 }
 
 .subHeader {
-	font-size: 12px;
+	font-size: 0.75rem;
 	color: #666;
-	margin-top: 4px;
+	margin-top: 0.25rem;
 }
 
 .addBtn {
 	background: #1976d2;
 	color: white;
 	border: none;
-	border-radius: 4px;
-	padding: 6px 8px;
+	border-radius: 0.25rem;
+	padding: 0.375rem 0.5rem;
 	cursor: pointer;
 }
 
@@ -44,18 +43,18 @@
 }
 
 .item {
-	padding: 8px;
+	padding: 0.5rem;
 	cursor: pointer;
-	border-radius: 4px;
-	margin-bottom: 6px;
+	border-radius: 0.25rem;
+	margin-bottom: 0.375rem;
 }
 
 .selectedItem {
 	background: #eef6ff;
-	padding: 8px;
+	padding: 0.5rem;
 	cursor: pointer;
-	border-radius: 4px;
-	margin-bottom: 6px;
+	border-radius: 0.25rem;
+	margin-bottom: 0.375rem;
 }
 
 .itemTitle {
@@ -69,14 +68,14 @@
 
 .editorArea {
 	flex: 1;
-	padding: 16px;
+	padding: 1rem;
 	box-sizing: border-box;
 }
 
 .empty {
 	color: #888;
 	text-align: center;
-	margin-top: 40px;
+	margin-top: 2.5rem;
 }
 
 .editor {
@@ -86,20 +85,20 @@
 }
 
 .titleInput {
-	font-size: 20px;
-	padding: 8px;
-	margin-bottom: 12px;
+	font-size: 1.25rem;
+	padding: 0.5rem;
+	margin-bottom: 0.75rem;
 	border: 1px solid #ccc;
-	border-radius: 4px;
+	border-radius: 0.25rem;
 }
 
 .contentInput {
 	flex: 1;
-	padding: 12px;
+	padding: 0.75rem;
 	border: 1px solid #ccc;
-	border-radius: 4px;
+	border-radius: 0.25rem;
 	resize: none;
-	min-height: 200px;
+	min-height: 12.5rem;
 }
 
 .loading {

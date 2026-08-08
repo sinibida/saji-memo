@@ -1,5 +1,5 @@
 import type Memo from "@/models/Memo"
-import styles from "./MainPage.module.css"
+import styles from "./Editor.module.css"
 import { useContext } from "react"
 import UseMainPageContext from "./UseMainPageContext"
 
