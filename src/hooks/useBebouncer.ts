@@ -1,6 +1,6 @@
 import { useCallback, useRef } from "react";
 
-export default function useDebouncer<T extends any[]>(fn: (...args: T) => void, delay: number) {
+export default function useDebouncer<T extends unknown[]>(fn: (...args: T) => void, delay: number) {
     const timeoutRef = useRef<number>(undefined);
 
     const call = useCallback((...args: T) => {
@@ -14,7 +14,7 @@ export default function useDebouncer<T extends any[]>(fn: (...args: T) => void, 
     const callImmediately = useCallback((...args: T) => {
         if (timeoutRef.current) clearTimeout(timeoutRef.current);
         fn(...args)
-    }, [fn, delay])
+    }, [fn])
 
     return { call, callImmediately }
 }

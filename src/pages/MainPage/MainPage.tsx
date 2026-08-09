@@ -1,7 +1,7 @@
 import useMainPage from "./useMainPage"
-import Sidebar from "./Sidebar"
-import Editor from "./Editor"
-import Loading from "./Loading"
+import Sidebar from "./components/Sidebar"
+import Editor from "./components/Editor"
+import Loading from "./components/Loading"
 import UseMainPageContext from "./UseMainPageContext"
 import styles from "./MainPage.module.css"
 
