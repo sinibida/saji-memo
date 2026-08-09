@@ -1,4 +1,6 @@
 .sidebar {
+	display: flex;
+	flex-direction: column;
 	width: 20rem;
 	border-right: 1px solid #e6e6e6;
 	padding: 1rem;
@@ -57,6 +59,7 @@
 }
 
 .memoList {
+	flex: 1;
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -90,5 +93,18 @@
 
 .itemTime {
 	font-size: 0.75rem;
+	color: #666;
+}
+
+.footer {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+    margin-top: 1rem;
+}
+
+.siteInfo {
+	font-size: 0.75rem;
+	text-align: center;
 	color: #666;
 }

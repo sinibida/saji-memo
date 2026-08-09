@@ -47,6 +47,13 @@ export default function Sidebar() {
                     </li>
                 ))}
             </ul>
+
+            <div className={styles.footer}>
+                <div className={styles.siteInfo}>
+                    싸지 메모<br/>
+                    SPAUPA | v0.1
+                </div>
+            </div>
         </aside>
     )
 }
