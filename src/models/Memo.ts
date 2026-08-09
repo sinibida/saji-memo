@@ -4,6 +4,4 @@ export default interface Memo {
     content: string;
     createdAt: Date;
     updatedAt: Date;
-    dirty: boolean;
-    deleted: boolean;
 }
