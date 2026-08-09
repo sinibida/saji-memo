@@ -1,7 +1,7 @@
 import type Memo from "@/models/Memo"
 import styles from "./Editor.module.css"
 import { useContext, useEffect, useRef } from "react"
-import UseMainPageContext from "./UseMainPageContext"
+import UseMainPageContext from "../UseMainPageContext"
 
 export default function Editor() {
     const textareaRef = useRef<HTMLTextAreaElement>(null);
