@@ -1,4 +1,4 @@
-import useDebouncer from "@/hooks/useBebouncer";
+import useDebouncer from "@/hooks/useDebouncer";
 import type Memo from "@/models/Memo"
 import MemoDTOToMemo from "@/models/MemoDTOToMemo";
 import MemoNew from "@/models/MemoNew"
