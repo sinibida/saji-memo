@@ -1,23 +1,35 @@
 import type Memo from "@/models/Memo"
 import styles from "./Editor.module.css"
-import { useContext, useEffect, useRef } from "react"
+import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import UseMainPageContext from "../UseMainPageContext"
+import { debounce } from "lodash";
 
 export default function Editor() {
-    const textareaRef = useRef<HTMLTextAreaElement>(null);
-
     const useMainPageReturn = useContext(UseMainPageContext);
     if (!useMainPageReturn) {
         throw new Error("Editor must be used within a UseMainPageContext.Provider");
     }
 
-    const { memos, selectedId, updateMemo } = useMainPageReturn;
-    const memo = memos.find(m => m.id === selectedId) as Memo;
+    const { memos: loadedMemos, selectedId, updateMemo } = useMainPageReturn;
+
+    const loadedMemo = loadedMemos.find(m => m.id === selectedId) as Memo;
+    const [memo, setMemo] = useState(loadedMemo)
+    useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setMemo(loadedMemo)
+    }, [loadedMemo])
+
+    const debouncedUpdateMemo = useMemo(
+        () => debounce<typeof updateMemo>((...args) => updateMemo(...args), 1500),
+        [updateMemo],
+    )
 
     const onChange = (updatedFields: Partial<Memo>) => {
-        updateMemo(memo.id, { ...updatedFields});
+        debouncedUpdateMemo(loadedMemo.id, { ...updatedFields });
+        setMemo(memo => ({ ...memo, ...updatedFields }))
     }
 
+    const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
         textareaRef.current?.focus();
     }, [selectedId])

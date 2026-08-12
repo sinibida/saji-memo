@@ -1,63 +1,57 @@
 import type Memo from "@/models/Memo"
 import MemoDTOToMemo from "@/models/MemoDTOToMemo";
 import MemoNew from "@/models/MemoNew"
-import apiGetMemoAll from "@/services/apiGetMemoAll";
 import { useCallback, useEffect, useState } from "react"
-import useMemoCommandHandler from "./useMemoCommandHandler";
+import { deleteDoc, onSnapshot, setDoc, updateDoc } from "firebase/firestore";
+import apiRefMemos from "@/services/apiRefMemos";
+import apiQueryToMemoDTOList from "@/services/apiQueryToMemoDTOList";
+import MemoToMemoDTO from "@/models/MemoToMemoDTO";
+import apiRefMemo from "@/services/apiRefMemo";
+import MemoToMemoDTOPartial from "@/models/MemoToMemoDTOPartial";
 
 export type UseMainPageReturn = ReturnType<typeof useMainPage>
 
 export default function useMainPage() {
     const [ready, setReady] = useState(false);
-    const [memos, setMemos] = useState<Memo[]>([]);
+    const [memos, setMemos] = useState<Memo[]>([]); // Updated by onSnapshot
+    const [saving, setSaving] = useState<boolean>(false); // Updated by onSnapshot
     const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
 
-    const cmdHandler = useMemoCommandHandler();
-
+    // memos
     useEffect(() => {
-        (async () => {
-            setMemos((await apiGetMemoAll()).map(MemoDTOToMemo))
+        return onSnapshot(apiRefMemos(), (collection) => {
+            // LEFTOFF textbox keeps on reseting when editing
+            setMemos(apiQueryToMemoDTOList(collection).map(MemoDTOToMemo))
             setReady(true)
-        })()
+        })
+    }, []);
+
+    // saving
+    useEffect(() => {
+        return onSnapshot(apiRefMemos(), { includeMetadataChanges: true }, (collection) => {
+            setSaving(collection.docs.some(doc => doc.metadata.hasPendingWrites))
+        })
     }, []);
 
     const addNewMemo = useCallback(() => {
         const newMemo = MemoNew()
-        setMemos(prevMemos => [newMemo, ...prevMemos])
-        cmdHandler.pushCommand({
-            type: "create",
-            id: newMemo.id,
-            data: newMemo,
-        })
+        setDoc(apiRefMemo(newMemo.id), MemoToMemoDTO(newMemo))
         return newMemo
-    }, [cmdHandler]);
+    }, []);
 
     const updateMemo = useCallback((id: string, updatedData: Partial<Memo>) => {
         const updatedMemo = {
             ...updatedData,
             updatedAt: new Date(),
         }
-        setMemos(memos => memos.map(memo => memo.id === id ? {
-            ...memo,
-            ...updatedMemo,
-        } : memo))
-        cmdHandler.pushCommand({
-            type: "update",
-            id,
-            data: updatedMemo,
-        })
-    }, [cmdHandler]);
+        updateDoc(apiRefMemo(id), MemoToMemoDTOPartial(updatedMemo))
+    }, []);
 
     const deleteMemo = useCallback((id: string) => {
-        const newMemos = memos.filter(memo => memo.id != id)
-        setMemos(newMemos)
-        cmdHandler.pushCommand({
-            type: "delete",
-            id,
-        })
-    }, [cmdHandler, memos]);
+        deleteDoc(apiRefMemo(id))
+    }, []);
 
     return {
-        memos, addNewMemo, updateMemo, deleteMemo, selectedId, setSelectedId, ready, saving: cmdHandler.flushing
+        memos, addNewMemo, updateMemo, deleteMemo, selectedId, setSelectedId, ready, saving
     }
 }
