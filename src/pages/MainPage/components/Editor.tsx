@@ -2,7 +2,7 @@ import type Memo from "@/models/Memo"
 import styles from "./Editor.module.css"
 import { useContext, useEffect, useMemo, useRef, useState } from "react"
 import UseMainPageContext from "../UseMainPageContext"
-import { debounce } from "lodash";
+import { debounce, pick } from "lodash";
 
 export default function Editor() {
     const useMainPageReturn = useContext(UseMainPageContext);
@@ -23,10 +23,16 @@ export default function Editor() {
         () => debounce<typeof updateMemo>((...args) => updateMemo(...args), 1500),
         [updateMemo],
     )
+    useEffect(() => {
+        return () => {
+            debouncedUpdateMemo.flush();
+        }
+    }, [debouncedUpdateMemo])
 
     const onChange = (updatedFields: Partial<Memo>) => {
-        debouncedUpdateMemo(loadedMemo.id, { ...updatedFields });
-        setMemo(memo => ({ ...memo, ...updatedFields }))
+        const newMemo = { ...memo, ...updatedFields }
+        setMemo(newMemo)
+        debouncedUpdateMemo(loadedMemo.id, pick(newMemo, "title", "content"));
     }
 
     const textareaRef = useRef<HTMLTextAreaElement>(null);
