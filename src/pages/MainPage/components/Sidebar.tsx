@@ -51,7 +51,7 @@ export default function Sidebar() {
             <div className={styles.footer}>
                 <div className={styles.siteInfo}>
                     싸지 메모<br/>
-                    SPAUPA | v0.1
+                    SPAUPA | v0.2
                 </div>
             </div>
         </aside>
