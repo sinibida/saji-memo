@@ -10,9 +10,11 @@ export default function Editor() {
         throw new Error("Editor must be used within a UseMainPageContext.Provider");
     }
 
-    const { memos: loadedMemos, selectedId, updateMemo } = useMainPageReturn;
+    const { selectedMemo: loadedMemo, updateMemo } = useMainPageReturn;
+    if (!loadedMemo) {
+        throw new Error("A memo must be selected to show the Editor.");
+    }
 
-    const loadedMemo = loadedMemos.find(m => m.id === selectedId) as Memo;
     const [memo, setMemo] = useState(loadedMemo)
     useEffect(() => {
         // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -35,14 +37,24 @@ export default function Editor() {
         debouncedUpdateMemo(loadedMemo.id, pick(newMemo, "title", "content"));
     }
 
+    // Focus handling
+    const focusedRef = useRef(false);
+    const titleRef = useRef<HTMLInputElement>(null);
     const textareaRef = useRef<HTMLTextAreaElement>(null);
     useEffect(() => {
-        textareaRef.current?.focus();
-    }, [selectedId])
+        if (focusedRef.current) return;
+        if (memo.title) {
+            textareaRef.current?.focus();
+        } else {
+            titleRef.current?.focus();
+        }
+        focusedRef.current = true;
+    }, [memo.title])
 
     return (
         <div className={styles.editor}>
             <input
+                ref={titleRef}
                 className={styles.titleInput}
                 value={memo.title}
                 placeholder="Title"

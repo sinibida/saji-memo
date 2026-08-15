@@ -17,7 +17,9 @@ export default function useMainPage() {
     const [saving, setSaving] = useState<boolean>(false); // Updated by onSnapshot
     const [selectedId, setSelectedId] = useState<string | undefined>(undefined);
 
-    // memos
+    // # State managing effects
+
+    // memos onSnapshot
     useEffect(() => {
         return onSnapshot(apiRefMemos(), (collection) => {
             // LEFTOFF textbox keeps on reseting when editing
@@ -26,12 +28,14 @@ export default function useMainPage() {
         })
     }, []);
 
-    // saving
+    // saving onSnapshot
     useEffect(() => {
         return onSnapshot(apiRefMemos(), { includeMetadataChanges: true }, (collection) => {
             setSaving(collection.docs.some(doc => doc.metadata.hasPendingWrites))
         })
     }, []);
+
+    // # Memo Functions
 
     const addNewMemo = useCallback(() => {
         const newMemo = MemoNew()
@@ -51,7 +55,18 @@ export default function useMainPage() {
         deleteDoc(apiRefMemo(id))
     }, []);
 
+    // # UseMemos
+
+    const selectedMemo = memos.find(m => m.id === selectedId) ?? null
+
     return {
-        memos, addNewMemo, updateMemo, deleteMemo, selectedId, setSelectedId, ready, saving
+        memos,
+        addNewMemo,
+        updateMemo,
+        deleteMemo,
+        setSelectedId,
+        ready,
+        saving,
+        selectedMemo,
     }
 }

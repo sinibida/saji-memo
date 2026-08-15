@@ -7,11 +7,9 @@ import styles from "./MainPage.module.css"
 
 export default function MainPage() {
     const useMainPageReturn = useMainPage();
-    const { memos, selectedId, ready } = useMainPageReturn;
+    const { selectedMemo, ready } = useMainPageReturn;
 
     if (!ready) return <Loading />
-
-    const selectedMemo = memos.find(m => m.id === selectedId) ?? null
 
     return (
         <UseMainPageContext.Provider value={useMainPageReturn}>
@@ -19,7 +17,7 @@ export default function MainPage() {
                 <Sidebar />
                 <main className={styles.editorArea}>
                     {selectedMemo ? (
-                        <Editor />
+                        <Editor key={selectedMemo.id}/>
                     ) : (
                         <div className={styles.empty}>메모를 선택하거나 생성하세요</div>
                     )}

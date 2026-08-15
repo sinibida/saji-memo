@@ -8,14 +8,14 @@ export default function Sidebar() {
     if (!useMainPageReturn) {
         throw new Error("Sidebar must be used within a UseMainPageContext.Provider");
     }
-    const { memos, selectedId, setSelectedId, addNewMemo, deleteMemo, saving } = useMainPageReturn;
+    const { memos, selectedMemo, setSelectedId, addNewMemo, deleteMemo, saving } = useMainPageReturn;
 
     const handleAdd = () => {
         const newMemo = addNewMemo();
         setSelectedId(newMemo.id);
     };
     const handleDelete = () => {
-        deleteMemo(selectedId!)
+        deleteMemo(selectedMemo!.id)
     };
 
     const onSelect = (id: string) => {
@@ -31,7 +31,7 @@ export default function Sidebar() {
                 </div>
                 <div className={styles.headerBtnRow}> 
                     <button className={styles.addBtn} onClick={handleAdd}>+</button>
-                    <button disabled={!selectedId} className={styles.deleteBtn} onClick={handleDelete}>x</button>
+                    <button disabled={!selectedMemo} className={styles.deleteBtn} onClick={handleDelete}>x</button>
                 </div>
             </div>
 
@@ -39,7 +39,7 @@ export default function Sidebar() {
                 {memos.map(m => (
                     <li
                         key={m.id}
-                        className={m.id === selectedId ? styles.selectedItem : styles.item}
+                        className={m.id === selectedMemo?.id ? styles.selectedItem : styles.item}
                         onClick={() => onSelect(m.id)}
                     >
                         <div className={styles.itemTitle}>{m.title || "제목 없음"}</div>
