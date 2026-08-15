@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "npx tsc --noEmit && eslint ."
+    "lint": "pnpm exec tsc --noEmit && pnpm exec eslint ."
   },
   "dependencies": {
     "firebase": "^12.17.1",
@@ -18,13 +18,13 @@
     "react-dom": "^19.2.8"
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.39.5",
     "@types/lodash": "^4.17.25",
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.17",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.4",
-    "eslint": "^10.8.1",
+    "eslint": "^9.39.5",
     "eslint-config-next": "^16.3.1",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.3",
